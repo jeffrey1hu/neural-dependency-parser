@@ -8,7 +8,7 @@ from parser_model import ParserModel
 from utils.parser_utils import load_and_preprocess_data
 
 
-def main(debug=True):
+def main(debug=False):
     print 80 * "="
     print "INITIALIZING"
     print 80 * "="

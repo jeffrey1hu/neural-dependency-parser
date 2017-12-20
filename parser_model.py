@@ -144,8 +144,8 @@ class ParserModel(Model):
                                  regularizer=regularizer,
                                  dtype=tf.float32)
             h = tf.add(tf.matmul(x, W), b1)
-            relu_h = tf.nn.relu(h)
-            h_drop = tf.nn.dropout(relu_h, keep_prob=self.dropout_placeholder)
+            cube_h = h ** 3
+            h_drop = tf.nn.dropout(cube_h, keep_prob=self.dropout_placeholder)
             pred = tf.add(tf.matmul(h_drop, U), b2)
         ### END YOUR CODE
         return pred

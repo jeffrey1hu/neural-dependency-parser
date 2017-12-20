@@ -19,6 +19,7 @@ python train.py
 * add reg term
 * add decay learning rate
 * add extra hidden layer
+* add cube as activation function
 * add POS & LABEL embeddings
 * add pre-trained glove wordvector init
 * add tensorboard
