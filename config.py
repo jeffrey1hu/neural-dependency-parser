@@ -14,3 +14,5 @@ class Config(object):
     n_epochs = 10
     lr = 0.001
     reg = 1e-8
+    # (decay per batch, decay rate)
+    lr_decay = (1000, 0.9)

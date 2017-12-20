@@ -40,6 +40,7 @@ class ParserModel(Model):
         self.input_placeholder = tf.placeholder(tf.int32, shape=(None, self.config.n_features), name='input_placeholder')
         self.labels_placeholder = tf.placeholder(tf.float32, shape=(None, self.config.n_classes), name='labels_placeholder')
         self.dropout_placeholder = tf.placeholder(tf.float32, shape=(None), name='droupout')
+        self.learning_rate = tf.placeholder(tf.float32, name='lr')
         ### END YOUR CODE
 
     def create_feed_dict(self, inputs_batch, labels_batch=None, dropout=1):
@@ -68,6 +69,7 @@ class ParserModel(Model):
         feed_dict = dict()
         feed_dict[self.dropout_placeholder] = self.config.dropout
         feed_dict[self.input_placeholder] = inputs_batch
+        feed_dict[self.learning_rate] = self.config.lr
         if labels_batch is not None:
             feed_dict[self.labels_placeholder] = labels_batch
         ### END YOUR CODE
@@ -195,7 +197,10 @@ class ParserModel(Model):
             train_op: The Op for training.
         """
         ### YOUR CODE HERE
-        train_op = tf.train.AdamOptimizer(learning_rate=self.config.lr).minimize(loss)
+        learning_rate = tf.train.exponential_decay(self.learning_rate, self.global_step,
+                                                   self.config.lr_decay[0], self.config.lr_decay[1],
+                                                   staircase=True)
+        train_op = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(loss)
         ### END YOUR CODE
         return train_op
 
@@ -229,6 +234,7 @@ class ParserModel(Model):
             print
 
     def __init__(self, config, pretrained_embeddings):
+        self.global_step = tf.Variable(0, trainable=False)
         self.pretrained_embeddings = pretrained_embeddings
         self.config = config
         self.build()
