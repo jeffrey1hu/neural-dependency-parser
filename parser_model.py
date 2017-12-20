@@ -134,31 +134,19 @@ class ParserModel(Model):
                                  initializer=tf.zeros_initializer(),
                                  regularizer=regularizer,
                                  dtype=tf.float32)
-            W2 = tf.get_variable("W2",
-                                shape=(self.config.hidden_size, self.config.hidden_size),
-                                initializer=tf.contrib.layers.xavier_initializer(),
-                                regularizer=regularizer)
-            b2 = tf.get_variable("b2",
-                                 shape=(self.config.hidden_size, ),
-                                 initializer=tf.zeros_initializer(),
-                                 regularizer=regularizer,
-                                 dtype=tf.float32)
             U = tf.get_variable("U",
                                 shape=(self.config.hidden_size, self.config.n_classes),
                                 initializer=tf.contrib.layers.xavier_initializer(),
                                 regularizer=regularizer)
-            b3 = tf.get_variable('b2',
+            b2 = tf.get_variable('b2',
                                  shape=(self.config.n_classes, ),
                                  initializer=tf.zeros_initializer(),
                                  regularizer=regularizer,
                                  dtype=tf.float32)
-            h1 = tf.add(tf.matmul(x, W), b1)
-            h1_relu = tf.nn.relu(h1)
-            h1_drop = tf.nn.dropout(h1_relu, keep_prob=self.dropout_placeholder)
-            h2 = tf.add(tf.matmul(h1_drop, W2), b2)
-            h2_relu = tf.nn.relu(h2)
-            h2_drop = tf.nn.dropout(h2_relu, keep_prob=self.dropout_placeholder)
-            pred = tf.add(tf.matmul(h2_drop, U), b3)
+            h = tf.add(tf.matmul(x, W), b1)
+            relu_h = tf.nn.relu(h)
+            h_drop = tf.nn.dropout(relu_h, keep_prob=self.dropout_placeholder)
+            pred = tf.add(tf.matmul(h_drop, U), b2)
         ### END YOUR CODE
         return pred
 
