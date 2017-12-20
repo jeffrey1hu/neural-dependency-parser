@@ -13,3 +13,12 @@ Greedy Transition-based dependency parsers based on neural network.
 ```shell
 python parser_model.py
 ```
+
+
+### TODO
+* add reg term
+* add decay learning rate
+* add extra hidden layer
+* add tensorboard
+* add POS & LABEL embeddings
+* add pre-trained glove wordvector init
