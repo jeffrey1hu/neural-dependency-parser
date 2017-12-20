@@ -9,10 +9,10 @@ class Config(object):
     n_classes = 3
     dropout = 0.5
     embed_size = 50
-    hidden_size = 400
+    hidden_size = 600
     batch_size = 2048
     n_epochs = 20
     lr = 0.001
-    reg = 1e-8
+    reg = 1e-4
     # (decay per batch, decay rate)
     lr_decay = (1000, 0.9)
