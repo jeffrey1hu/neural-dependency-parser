@@ -11,7 +11,7 @@ Greedy Transition-based dependency parsers based on neural network.
 * Set the hyper-parameters in `config.py`.
 * Then run with existing dataset
 ```shell
-python parser_model.py
+python train.py
 ```
 
 
@@ -19,6 +19,6 @@ python parser_model.py
 * add reg term
 * add decay learning rate
 * add extra hidden layer
-* add tensorboard
 * add POS & LABEL embeddings
 * add pre-trained glove wordvector init
+* add tensorboard

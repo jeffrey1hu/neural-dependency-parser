@@ -147,7 +147,7 @@ class ParserModel(Model):
                                 shape=(self.config.hidden_size, self.config.n_classes),
                                 initializer=tf.contrib.layers.xavier_initializer(),
                                 regularizer=regularizer)
-            b3 = tf.get_variable('b2',
+            b3 = tf.get_variable('b3',
                                  shape=(self.config.n_classes, ),
                                  initializer=tf.zeros_initializer(),
                                  regularizer=regularizer,
